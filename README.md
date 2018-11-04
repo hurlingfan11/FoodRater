@@ -1,0 +1,2 @@
+# FoodRater
+Learning about adapters
