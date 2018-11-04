@@ -2,6 +2,7 @@ package com.clancy.conor.foodrater;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,18 +11,24 @@ import android.widget.TextView;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder>{
 
+    private List<Food>
     public void addFood(){
 
     }
 
     @NonNull
     @Override
-    public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_view_item,
+                parent, false);
+
+        return new FoodViewHolder(itemView)
         return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder foodViewHolder, int i) {
+    final Food food =mFoods.get(position);
 
     }
 
