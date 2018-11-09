@@ -29,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
         final FoodAdapter foodAdapter = new FoodAdapter();
         recyclerView.setAdapter(foodAdapter);
 
-        foodAdapter:addFood();
-        foodAdapter:addFood();
-        foodAdapter:addFood();
+        foodAdapter.addFood();
+        //foodAdapter.addFood();
+        //foodAdapter.addFood();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                foodAdapter.addFood();
             }
         });
     }
