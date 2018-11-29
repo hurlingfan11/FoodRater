@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,12 +17,18 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     private List<Food> mFoods = new ArrayList<>();
     private RecyclerView mRecyclerView;
-    private Random mRandom = new Random();
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView){
+        super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerView = recyclerView;
+    }
 
 
     public void addFood()
     {
-        //Food food = new Food();
+        Food newFood = new Food();
+        mFoods.add(0, newFood);
         //notifyDataSetChanged(); // Works fine but no animation
         notifyItemInserted(0);
         notifyItemRangeChanged(0, mFoods.size());
@@ -37,21 +42,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         notifyItemRangeChanged(0, mFoods.size());
     }
 
-    private String getRandomName()
-    {
-        String[] names = new String[]{
-                "Banana", "Broccoli", "Homemade Bread", "Chicken", "Chocolate", "Ice Cream",
-                "Lima Beans", "Steak"
-        };
-        return names[mRandom.nextInt(names.length)];
 
-    }
         @NonNull
         @Override
         public FoodViewHolder onCreateViewHolder (@NonNull ViewGroup parent,int i)
         {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_view_item,
                     parent, false);
+
 
             return new FoodViewHolder(itemView);
 
@@ -88,6 +86,17 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                 mName = itemView.findViewById(R.id.name);
                 mRatingBar = itemView.findViewById(R.id.rating_bar);
 
+                mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                        if (fromUser){
+                            Food currentFood = mFoods.get(getAdapterPosition());
+                            currentFood.setRating(rating);
+
+                        }
+
+                    }
+                });
                 // Delete this food on Long Press
                 itemView.setOnLongClickListener(new View.OnLongClickListener()
                 {

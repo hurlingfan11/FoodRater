@@ -14,6 +14,7 @@ public class Food {
   private Random random = new Random();
 
   public static final HashMap<String, Integer> sFoodImageMap;
+
   static {
     sFoodImageMap = new HashMap<>();
     sFoodImageMap.put("Banana", R.drawable.banana);

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,17 +30,27 @@ public class MainActivity extends AppCompatActivity {
         final FoodAdapter foodAdapter = new FoodAdapter();
         recyclerView.setAdapter(foodAdapter);
 
-        foodAdapter.addFood();
-        //foodAdapter.addFood();
-        //foodAdapter.addFood();
+
+            foodAdapter.addFood();
+
+            foodAdapter.addFood();
+
+            foodAdapter.addFood();
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Adding new food ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                foodAdapter.addFood();
+                try{
+                    foodAdapter.addFood();
+                }catch (Exception ex){
+                    Log.e("Error on contact", ex.getMessage());
+                }
+
             }
         });
     }
